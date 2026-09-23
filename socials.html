@@ -8,6 +8,56 @@
 
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="media/img/loaf.ico" type="image/x-icon">
+    <style>
+  body {
+    margin: 0;
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .carousel {
+    width: 80vw;
+    max-width: 1200px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 12px;
+  }
+
+  .slides {
+    display: flex;
+    transition: transform 0.6s ease;
+  }
+
+  .slide {
+    min-width: 100%;
+    text-align: center;
+  }
+
+  .slide img {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+  }
+
+  .btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.6);
+    border: none;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 50%;
+  }
+
+  #prev { left: 10px; }
+  #next { right: 10px; }
+</style>
+
 </head>
 
 <body>
@@ -35,12 +85,45 @@ class="icon-card" aria-label="socials"
 
     <!-- Main page content -->
     <main class="page-content">
+<div class="carousel">
+  <div class="slides" id="slides">
+    <div class="slide">
+      <a href="https://www.youtube.com/@consrant" target="_blank">
+        <img src="icons/youtube.png" alt="youtube">
+      </a>
+    </div>
+    <div class="slide">
+      <a href="https://twitch.tv/consrant581" target="_blank">
+        <img src="icons/twitch.png" alt="twitch">
+      </a>
+    </div>
+    <div class="slide">
+      <a href="https://www.instagram.com/consrant1" target="_blank">
+        <img src="insta.png" alt="instagram">
+      </a>
+    </div>
+  </div>
 
- <a href="https://www.youtube.com/@consrant" target="_blank" rel="noopener">
-  <img src="logos/youtube.png" 
-       alt="Consrant YouTube Channel" 
-       width="40" height="40" 
-       style="vertical-align: middle;">
+  <button class="btn" id="prev">&#10094;</button>
+  <button class="btn" id="next">&#10095;</button>
+</div>
+
+<script>
+let index = 0;
+const slides = document.getElementById("slides");
+const total = document.querySelectorAll(".slide").length;
+
+document.getElementById("next").onclick = () => {
+  index = (index + 1) % total;
+  slides.style.transform = `translateX(-${index * 100}%)`;
+};
+
+document.getElementById("prev").onclick = () => {
+  index = (index - 1 + total) % total;
+  slides.style.transform = `translateX(-${index * 100}%)`;
+};
+</script>
+
 
     </main>
 
